@@ -91,3 +91,15 @@ LogReg.fit(X_train, Y_train)
 
 prediction_test = LogReg.predict(X_test)
 print('Accuracy: =>', metrics.accuracy_score(Y_test, prediction_test))
+
+feature_names = df_no_status.columns
+coefs = list(zip(LogReg.coef_[0], feature_names))
+
+# Sorting the list in descending order by coefficient value
+coefs = sorted(coefs, key=lambda x: x[0], reverse=True)
+
+# Getting the top 10 highest values
+top_10 = coefs[:10]
+
+for coef in top_10:
+    print(f'{coef[1]}: {coef[0]}')
