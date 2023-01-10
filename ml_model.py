@@ -9,11 +9,7 @@ import numpy as np
 from sklearn.preprocessing import scale
 from sklearn import metrics
 
-
-# read the CSV file into a DataFrame
 loan_data = pd.read_csv('Loan_Default.csv')
-
-# Insert both numerical and categorical features
 
 numerical_columns = [
     'loan_amount',
@@ -68,13 +64,10 @@ else:
 
 # One-hot encoding for categorical features only
 cat_feat = pd.get_dummies(loan_data[categorical_columns])
-
 df_no_status = loan_data[numerical_columns].join(cat_feat)
 
 # Converting all cat. labels to the ordinary array
 key_list = df_no_status.columns.tolist()
-
-# Creating a pandas DataFrame with both cat. and num. features
 new_loan_data = df_no_status.join(loan_data[['Status']])
 
 # Standardizing dataframe without 'Status' for future training
